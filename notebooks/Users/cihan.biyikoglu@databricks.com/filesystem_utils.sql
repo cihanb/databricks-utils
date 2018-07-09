@@ -1,8 +1,8 @@
 -- Databricks notebook source
 -- MAGIC %python
 -- MAGIC #dirsize_r: add total size of all files under a given path
--- MAGIC #  dir: path to the root folder
--- MAGIC #  debug: enable (1) to see what's been evaluated 
+-- MAGIC #  dir: path to the root folder to traverse (string: "dbfs:/...")
+-- MAGIC #  debug: enable verbose debug details (default 0, 1 to enable)
 -- MAGIC def dirsize_r(dir, debug = 0):
 -- MAGIC   size = 0
 -- MAGIC   for i in dbutils.fs.ls(dir):
@@ -19,8 +19,8 @@
 
 -- MAGIC %python
 -- MAGIC #dirfilecount_r: count all directories and files under a given path except the root. 
--- MAGIC #  dir: path to the root folder to traverse
--- MAGIC #  debug: enable (1) to see what's been evaluated 
+-- MAGIC #  dir: path to the root folder to traverse (string: "dbfs:/...")
+-- MAGIC #  debug: enable verbose debug details (default 0, 1 to enable)
 -- MAGIC def dirfilecount_r(dir, debug = 0):
 -- MAGIC   count = 0
 -- MAGIC   for i in dbutils.fs.ls(dir):
@@ -37,7 +37,9 @@
 -- COMMAND ----------
 
 -- MAGIC %python
--- MAGIC 
+-- MAGIC #ls_r: ls with recusion
+-- MAGIC #  dir: path to the root folder to traverse (string: "dbfs:/...")
+-- MAGIC #  debug: enable verbose debug details (default 0, 1 to enable)
 -- MAGIC def ls_r(dir, debug = 0):
 -- MAGIC   for i in dbutils.fs.ls(dir):
 -- MAGIC     if i.name[len(i.name)-1]== "/":
@@ -50,6 +52,8 @@
 -- COMMAND ----------
 
 -- MAGIC %scala
+-- MAGIC #dataSkippingStats: partition and file skipping stats
+-- MAGIC #  query: string for SQL query (string: "select * from table where ...")
 -- MAGIC def dataSkippingStats(query: String): Unit = {
 -- MAGIC   import com.databricks.sql.transaction.tahoe._
 -- MAGIC   import com.databricks.sql.transaction.tahoe.stats._
@@ -66,3 +70,6 @@
 -- MAGIC   }
 -- MAGIC   println("\n")
 -- MAGIC }
+
+-- COMMAND ----------
+

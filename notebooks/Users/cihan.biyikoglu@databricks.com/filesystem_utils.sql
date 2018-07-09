@@ -52,8 +52,8 @@
 -- COMMAND ----------
 
 -- MAGIC %scala
--- MAGIC #dataSkippingStats: partition and file skipping stats
--- MAGIC #  query: string for SQL query (string: "select * from table where ...")
+-- MAGIC // dataSkippingStats: partition and file skipping stats
+-- MAGIC //  query: string for SQL query (string: "select * from table where ...")
 -- MAGIC def dataSkippingStats(query: String): Unit = {
 -- MAGIC   import com.databricks.sql.transaction.tahoe._
 -- MAGIC   import com.databricks.sql.transaction.tahoe.stats._
